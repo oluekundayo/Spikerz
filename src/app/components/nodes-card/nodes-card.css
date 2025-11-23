@@ -1,0 +1,70 @@
+
+
+.modal-container {
+  overflow: visible;
+}
+
+.modal-content {
+  background-color: white;
+  font-family: sans-serif; 
+}
+
+.modal-header {
+  display: flex;
+  align-items: center;
+  margin-bottom: 1.2rem;
+}
+
+.icon-circle {
+  width: 3.2rem;
+  height: 3.2rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.modal-title {
+  font-size: 1.6rem;
+  font-weight: bold;
+  color: #333;
+}
+
+/* Body Section */
+.modal-body {
+  display: flex;
+  flex-direction: column;
+}
+
+.log-entry {
+  display: flex;
+  align-items: center;
+  margin-bottom: .7rem;
+}
+
+.log-label {
+  font-size: 1.4rem;
+  color: #555;
+  flex-grow: 1;
+}
+
+.version-tag {
+  background-color: #ede7f6; 
+  color: #5e35b1;
+  padding: .2rem .8rem;
+  border-radius: .4rem;
+  font-size: 1.2rem;
+  font-weight: 500;
+  margin-left: .4rem;
+}
+
+.tags-row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+}
+
+.tag-label {
+  font-size: 1.4rem;
+  color: #555;
+  margin-right: .4rem; 
+}

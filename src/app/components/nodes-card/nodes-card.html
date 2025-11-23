@@ -1,0 +1,126 @@
+<svg viewBox="0 0 800 280" xmlns="http://www.w3.org/2000/svg" class="network-diagram relative">
+    @for (arrow of arrows; track arrow) {
+  <image
+    [attr.x]="arrow.x"
+    [attr.y]="arrow.y"
+    [attr.width]="arrow.width"
+    [attr.height]="arrow.height"
+    [attr.href]="arrow.img"
+  ></image>
+  }
+
+  <defs>
+    <marker id="arrowhead" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#9E9E9E"></polygon>
+    </marker>
+  </defs>
+
+    @for (node of renderedNodes(); track node; let i = $index) {
+  <g
+    class="node"
+    [ngClass]="node.class"
+    (mouseenter)="showModalOnHover(node, i)"
+    (mouseleave)="hideModalOnHover()"
+    style="cursor: pointer"
+  >
+    <image
+      [attr.x]="node.x"
+      [attr.y]="node.y"
+      [attr.width]="node.width"
+      [attr.height]="node.height"
+      [attr.href]="node.img"
+    ></image>
+
+    <text
+      [attr.x]="node.x + node.width / 2"
+      [attr.y]="node.y + 90"
+      text-anchor="middle"
+      font-size="14"
+      fill="#424242"
+    >
+      {{ node.label }}
+    </text>
+  </g>
+  } 
+</svg>
+
+@if (selectedNode()) {
+<div 
+  class="absolute z-50 transition-opacity duration-200 pointer-events-none" 
+  [style.left.px]="selectedNodeX()"
+  [style.top.px]="selectedNodeY()"
+>
+  <div class="modal-content p-6 bg-white rounded-xl shadow-lg w-fit pointer-events-auto">
+    
+    @if (selectedNode()!.details.image) {
+    <div class="modal-header flex items-center gap-4 mb-4">
+      <div class="icon-circle w-10 h-10 flex items-center justify-center p-1">
+        <img [src]="selectedNode()!.img" alt="" class="w-full h-full object-contain">
+      </div>
+      <div>
+        <p class="font-bold text-[#525D73] text-md">{{ selectedNode()!.label }}</p>
+        <p class="font-light text-[#525D73] text-sm">{{ selectedNode()!.subLabel }}</p>
+      </div>
+    </div>
+    }
+
+    <div class="modal-body">
+      @if(selectedNode()!.id === 1) {
+      <div class="w-fit">
+        <div class="inline-block px-3 py-1 bg-pink-100 text-red-600 rounded-lg text-sm font-semibold mb-6">
+          Lorem Ipsum Dolor Sit
+        </div>
+
+        <div class="space-y-4 mb-8">
+          @for (row of selectedNode()!.details.ipAddress; track $index) {
+          <div class="flex gap-3">
+            @for (item of row; track $index) {
+            <div class="flex-1 text-center">
+              <span class="inline-block px-4 py-1.5 bg-red-100 text-red-600 rounded-md font-medium text-xs tracking-wide">
+                {{ item }}
+              </span>
+            </div>
+            }
+          </div>
+          }
+        </div>
+
+        <div class="inline-flex items-baseline px-4 py-2 bg-purple-100 rounded-lg">
+          <span class="text-purple-700 font-semibold mr-2">
+            Lorem:
+          </span>
+          <span class="text-purple-700 font-medium text-base">
+            {{ selectedNode()!.details.ipAddress[0][0] }}
+          </span>
+        </div>
+      </div>
+      } 
+      @else {
+      <div class="space-y-3">
+        <div class="flex justify-start items-center gap-2 w-fit">
+          <img src="images/files.svg" alt="" class="w-4 h-4">
+          <span class="text-sm font-medium text-[#525D73]">Lorem:</span>
+          <span class="text-sm font-medium w-full text-[#525D73]">{{selectedNode()!.details.zone}}</span>
+        </div>
+        
+        <span class="text-xs font-normal px-2 py-1 rounded"
+          [ngClass]="
+            selectedNode()!.class === 'risk-critical'
+              ? 'bg-[#FFF9ED] text-[#EBA622]'
+              : 'bg-[#F2EDFF] text-[#6236CC]'
+          ">
+          {{ selectedNode()!.details.description }}
+        </span>
+
+        <div class="flex items-center gap-2">
+          @for (ip of selectedNode()!.details.ipAddress; track $index) {
+            <span class="text-xs font-normal text-[#525D73]">{{ ip }}</span>
+          }
+          <span class="text-[#525D73] font-bold text-sm">{{ selectedNode()!.details.version }}</span>
+        </div>
+      </div>
+      }
+    </div>
+  </div>
+</div>
+}

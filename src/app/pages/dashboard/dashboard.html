@@ -1,1 +1,80 @@
-<p>dashboard works!</p>
+<div class="flex flex-col lg:flex-row space-y-6 lg:space-y-0 lg:space-x-6 p-6">
+  <!-- Left Column -->
+  <section
+    class="w-full lg:w-1/3 space-y-4 shadow-2xl rounded-2xl bg-white px-7 pt-5 max-h-screen overflow-y-auto"
+  >
+    <div class="mb-11">
+      <h3 class="text-[#02983E] font-semibold">Description</h3>
+      <p class="text-[#525D73] text-sm">@if(description()) { {{ description() }} }</p>
+    </div>
+    <div>
+      <h3 class="text-[#02983E] font-semibold">Extra</h3>
+      <p class="text-[#525D73] text-sm">@if(extra()) { {{ extra() }} }</p>
+    </div>
+    <hr class="custom-hr" />
+    <div class="space-y-1 text-sm">
+      @for (desList of desList(); track desList){
+      <div class="flex justify-start items-center gap-5 flex-wrap">
+        <span class="font-bold text-[1rem] text-[#334155]">{{ desList.name }}</span>
+        <div class="flex justify-start items-center gap-1.5 flex-wrap">
+          @if (desList.checkbox) {<img src="images/checked.svg" alt="" />}
+          <span class="font-normal text-[1rem] text-[#525D73]">{{ desList.des }}</span>
+        </div>
+      </div>
+      }
+    </div>
+
+    <hr class="custom-hr" />
+    <div>
+      <p class="font-bold text-[1rem] text-[#334155]">Lorem ipsum dolor sit</p>
+      <app-technique-card [cardData]="cardList()"></app-technique-card>
+    </div>
+  </section>
+
+  <!-- Right Column -->
+  <section class="p-4 bg-white w-full lg:flex-1 space-y-6 shadow-sm rounded-lg">
+    <div>
+      <h3 class="font-semibold text-green-600 mb-2">Lorem Lorem Lorem</h3>
+      <div class="bg-[#FAFAFA] rounded-lg p-4 relative">
+        <app-nodes-card [nodes]="nodes()"></app-nodes-card>
+
+      <hr class="custom-hr" />
+      <div class="flex items-center gap-8 p-4">
+        @for (item of statusItems; track item.icon) {
+        <div class="flex items-center space-x-2">
+          <div
+            class=" flex items-center justify-center p-1"
+            style="min-width: 2rem"
+          >
+            @if (item.icon === 'cross') {
+            <img src="images/{{ item.icon }}.svg" alt="" />
+            } @if (item.icon === 'warning') {
+
+            <img src="images/{{ item.icon }}.svg" alt="" />
+            } @if (item.icon === 'check') {
+
+            <img src="images/{{ item.icon }}.svg" alt="" />
+            }
+          </div>
+
+          <span
+            class="text-sm font-semibold"
+            [ngClass]="{
+              'text-red-600': item.color === 'red',
+              'text-orange-600': item.color === 'orange',
+              'text-green-600': item.color === 'green'
+            }"
+          >
+            {{ item.text }}
+          </span>
+        </div>
+        } @empty {
+        <p class="text-gray-500">No status indicators to display.</p>
+        }
+      </div>
+      </div>
+    </div>
+
+    <app-risk-card></app-risk-card>
+  </section>
+</div>

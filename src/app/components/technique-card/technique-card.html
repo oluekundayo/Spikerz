@@ -1,0 +1,47 @@
+<div class="grid grid-cols-1 gap-6">
+  <!-- Angular @for Loop -->
+  @for (card of cardData(); track card.id) {
+  <!-- Card Component Implementation -->
+  <div
+    class="bg-white rounded-2xl shadow-md overflow-hidden p-6 transition duration-300hover:scale-[1.02] mb-3"
+  >
+    <!-- Card Title -->
+    <h2 class="text-xl capitalize font-semibold text-[#030229] mb-4">
+      {{ card.title }}
+    </h2>
+
+    <div class="flex items-center p-4 bg-[#FAFAFA] border border-[#FAFAFA] rounded-2xl ">
+      <div class="mr-4">
+        <div
+          class="w-12 h-12 rounded-full flex items-center justify-center"
+        >
+          <img src="images/server.svg" alt="">
+        </div>
+      </div>
+      <div class="flex justify-center items-center">
+        <div class="flex flex-col pr-4 border-r gap-1 border-gray-300">
+          <p class="text-xs font-medium text-gray-800 leading-none">
+            {{ card.detailHeader }}
+          </p>
+          <p class="text-[.6rem] text-gray-500 leading-tight">
+            {{ card.detailSubheader }}
+          </p>
+        </div>
+        <div class="flex-1 pl-4 flex items-center">
+          <p class="text-base text-gray-700">
+            {{ card.detailContent }}
+          </p>
+        </div>
+      </div>
+    </div>
+    <p class="text-gray-600 text-base leading-relaxed">
+      {{ card.description }}
+    </p>
+  </div>
+  } @empty {
+  <!-- Content to display if the cardList is empty -->
+  <div class="col-span-full text-center py-10 text-gray-500 italic">
+    No system cards are currently available.
+  </div>
+  }
+</div>
