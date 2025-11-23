@@ -1,25 +1,21 @@
 .content-container {
   display: flex;
-  flex-direction: column; /* Stack chart and legend vertically */
+  flex-direction: column;
   align-items: center;
 }
 
 .chart-container {
-  /* Only needed if you want spacing around the chart */
-  margin-bottom: 20px;
+  margin-bottom: 2.0rem;
 }
 
 .donut-chart {
-  /* Size of the outer circle */
-  width: 150px; 
-  height: 150px;
+  width: 12.0rem; 
+  height: 12.0rem;
   border-radius: 50%;
   position: relative;
-  /* background is set dynamically via [style.background] with conic-gradient */
 }
 
 .donut-hole {
-  /* Creates the "hole" */
   width: 90%;
   height: 90%;
   background-color: white;
@@ -36,30 +32,27 @@
   left: 50%;
   transform: translate(-50%, -50%);
 }
-
-/* --- Legend --- */
-
 .legend-container {
-  width: 100%; /* Take full width of the card's content area */
-  padding-top: 20px;
+  width: 100%;
+  padding-top: 2.0rem;
 }
 
 .legend-item {
   display: flex;
   align-items: center;
-  margin-bottom: 8px;
+  margin-bottom: .8rem;
   font-size: 0.9rem;
 }
 
 .legend-color-box {
-  width: 12px;
-  height: 12px;
-  margin-right: 8px;
-  border-radius: 2px; /* Slight rounding for the boxes */
+  width: 1.2rem;
+  height: 1.2rem;
+  margin-right: .8rem;
+  border-radius: .2rem;
 }
 
 .legend-name {
-  flex-grow: 1; /* Pushes the percentage to the right */
+  flex-grow: 1;
   color: #555;
 }
 

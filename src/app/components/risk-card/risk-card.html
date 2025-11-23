@@ -1,4 +1,4 @@
-<div class="p-4 md:p-8 bg-gray-50">
+<div class="p-4 bg-gray-50">
   <h1 class="text-2xl font-semibold text-green-600 mb-8">Lorem Ipsum Dolor Sit</h1>
 
   <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
@@ -49,13 +49,14 @@
 
     <p-card
       header="Contextual Risk"
-      class="flex flex-col md:flex-row justify-between items-center gap-1 md:gap-8"
+      class="grid grid-cols-1 md:grid-cols-2 gap-8 items-center w-full"
     >
-      <div class="space-y-2 text-sm w-fit">
+      <!-- LEFT: Risk Summary -->
+      <div class="space-y-2 text-sm font-medium">
         @for (riskLevel of ['Critical', 'High', 'Medium', 'Low']; track riskLevel) {
-        <div class="flex items-center space-x-1 w-fit">
+        <div class="flex items-center space-x-3 w-fit">
           <span
-            class="w-2 h-2 rounded-full"
+            class="w-3 h-3 rounded-full"
             [ngClass]="{
               'bg-red-600': riskLevel === 'Critical',
               'bg-orange-400': riskLevel === 'High',
@@ -64,9 +65,7 @@
             }"
           ></span>
 
-          <span class="text-gray-600 text-sm ">
-            {{ riskLevel }}
-          </span>
+          <span class="text-gray-600 w-fit">{{ riskLevel }}</span>
 
           <span class="text-gray-800 font-semibold">
             {{ riskSummary()[riskLevel] }}
@@ -74,9 +73,11 @@
         </div>
         }
       </div>
-      <div class="flex justify-center md:justify-end w-full md:w-auto">
+
+      <!-- RIGHT: Donut Chart -->
+      <div class="flex justify-center items-center">
         <div
-          class="donut-chart relative w-40 h-40 sm:w-48 sm:h-48 md:w-52 md:h-52"
+          class="donut-chart relative w-40 h-40 sm:w-48 sm:h-48 md:w-56 md:h-56"
           [style.background]="conicGradientValue()"
         >
           <div
