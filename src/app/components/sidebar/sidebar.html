@@ -1,0 +1,83 @@
+<div class="flex h-screen bg-gray-50">
+  <!-- Sidebar -->
+  <aside
+    class="bg-white rounded-tr-md transition-all duration-300 ease-in-out h-full flex flex-col shadow-2xl relative"
+    [class.w-64]="!collapsed()"
+    [class.w-20]="collapsed()"
+  >
+    @if (collapsed()) {
+    <div class="flex items-center justify-between p-4">
+      <div class="flex items-center space-x-2">
+        <img src="spikerz-icon.png" class="w-8 h-8" alt="Logo" />
+      </div>
+    </div>
+    }
+    <button
+      pButton
+      (click)="toggleSidebar()"
+      class="p-2 rounded-full focus:border-none focus:outline-none absolute top-5 -right-3 bg-[#00732E]"
+    >
+      <svg width="8" height="10" viewBox="0 0 8 13" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path
+          d="M6.30002 11.7L0.900024 6.30002L6.30002 0.900024"
+          stroke="white"
+          stroke-width="1.8"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+        />
+      </svg>
+    </button>
+    <nav class="flex-1 p-3 space-y-2">
+      @for (item of menuItems(); track item.label){
+      <a
+        routerLink="/d/{{ item.url }}"
+        routerLinkActive="font-bold bg-[#E9FAF0] active-link"
+        class="flex items-center space-x-3 p-2 rounded-lg hover:bg-[#E9FAF0] cursor-pointer text-white"
+      >
+        <img src="images/{{ item.icon }}.svg" alt="{{ item.label }}" class="w-5 h-5" />
+        @if (!collapsed()){
+        <span class="font-medium text-[#525D73]">{{ item.label }}</span>
+        }
+      </a>
+      }
+    </nav>
+
+    <!-- Bottom Section -->
+    <div class="p-4 mt-auto space-y-4">
+      <!-- Logout -->
+      @for (item of menuItemsBottom(); track item.label){
+      <a
+        routerLink="/d/{{ item.url }}"
+        routerLinkActive="font-bold bg-[#E9FAF0] active-link"
+        class="flex items-center space-x-3 p-2 rounded-lg hover:bg-[#E9FAF0] cursor-pointer text-white"
+      >
+        <img src="images/{{ item.icon }}.svg" alt="{{ item.label }}" class="w-5 h-5" />
+        @if (!collapsed()){
+        <span class="font-medium text-[#525D73]">{{ item.label }}</span>
+        }
+      </a>
+      }
+
+      <!-- User -->
+      <div class="flex items-center gap-3 p-2 rounded-lg hover:bg-white/10 cursor-pointer">
+        <div class=" bg-transparent flex items-center justify-center">
+          <img src="images/profile.svg" alt="">
+        </div>
+        @if (!collapsed()) {
+        <div class="flex justify-between items-center w-full">
+          <div>
+            <p class="font-medium text-gray-500">Lorem</p>
+            <p class="text-xs text-gray-500">Lorem</p>
+          </div>
+          <img src="images/logout.svg" alt="" />
+        </div>
+        }
+      </div>
+    </div>
+  </aside>
+
+  <!-- Main Content -->
+  <main class="flex-1 p-4 overflow-auto h-screen bg-white">
+    <ng-content> </ng-content>
+  </main>
+</div>

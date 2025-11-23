@@ -1,0 +1,17 @@
+
+
+/* Hover state */
+a:hover svg path {
+  fill: #34D399 !important; /* Tailwind green-400 or any color you want */
+}
+
+/* Active state */
+a.active-link svg path {
+  fill: #059669 !important; /* Tailwind green-600 or your chosen color */
+}
+
+/* Default svg fill */
+a svg path {
+  fill: #525D73 !important; /* Default gray color */
+  transition: fill 0.2s ease;
+}
